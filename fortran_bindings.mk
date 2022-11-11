@@ -8,9 +8,6 @@ CC          = gcc
 CFLAGS      = -O2 -g -I$(BLIS_INC)
 LINKER      = $(CC)
 
-FC          = gfortran
-FCFLAGS     = -I./include
-
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
