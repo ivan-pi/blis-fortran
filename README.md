@@ -22,6 +22,15 @@ $ make -f fortran_bindings.mk
 ```
 This will place the BLIS Fortran interfaces in the folder `include/`. Currently only a small subset of the BLIS Typed API is covered.
 
+## Examples & tests
+
+After the bindings are generated, you can explore the examples or run the tests (TODO).
+
+For example to run a GEMM:
+```
+$ cd examples/
+$ make && ./demo_gemm
+```
 
 ## Acknowledgements
 
