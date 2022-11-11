@@ -16,11 +16,11 @@ To create the bindings you will need:
 
 _NOTE: This section assumes you've already installed BLIS into a known location. For more details refer to the BLIS [Build System](https://github.com/flame/blis/blob/master/docs/BuildSystem.md)._
 
-To build a prototype interface run:
-
+To build the Fortran interfaces run:
 ```
-$ make
+$ make -f fortran_bindings.mk 
 ```
+This will place the BLIS Fortran interfaces in the folder `include/`. Currently only a small subset of the BLIS Typed API is covered.
 
 
 ## Acknowledgements

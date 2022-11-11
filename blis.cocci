@@ -96,9 +96,9 @@ def parameter_and_declaration_lists(pl,C2F_DICT=BLIS_C2F_DICT):
 
 	return parameters, declarations
 
-print "! void {name}({args})".format(name=ff,args=", ".join(pl))
+print("! void {name}({args})".format(name=ff,args=", ".join(pl)))
 
 params, decls = parameter_and_declaration_lists(pl)
-print fortran_subroutine(ff,params,decls)
+print(fortran_subroutine(ff,params,decls))
 
 
