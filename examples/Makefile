@@ -10,7 +10,7 @@ FCFLAGS     = -O2 -g -I../include/
 all: demo_gemm
 
 demo_gemm: demo_gemm.F90
-	$(FC) demo_gemm.F90  -o $@ $(FCFLAGS) $(BLIS_LIB) $(OTHER_LIBS)
+	$(FC) ../modules/blis.f90 demo_gemm.F90  -o $@ $(FCFLAGS) $(BLIS_LIB) $(OTHER_LIBS)
 
 .phony: clean
 clean:

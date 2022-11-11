@@ -4,6 +4,10 @@ This repository contains prototype Fortran bindings for the [BLIS](https://githu
 
 In the future these may be either published independently or contributed to the upstream project.
 
+BLIS - the BLAS-like Library Instantiation Software Framework, can be used to perform high-performance dense linear algebra operations via a BLAS-like API. Since BLIS is written in ISO C99, the BLIS procedures can be called safely from Fortran via the C interoperability features available since Fortran 2003. We plan to export interfaces for the full [BLIS Typed API](https://github.com/flame/blis/blob/master/docs/BLISTypedAPI.md).
+
+Note that the BLIS library already includes a BLAS compatibility layer. If you'd like to use the native BLAS interface, this project is not needed. However, BLIS is not BLAS, and BLIS exposes some extra functionality which is not available in BLAS.
+
 ## Requirements
 
 To create the bindings you will need:

@@ -70,6 +70,7 @@ end function
 end module
 
 program demo_gemm
+use blis
 use blis_kinds
 use colors
 implicit none
@@ -82,6 +83,8 @@ real :: a(3,3), b(3,2), c(3,2)
 
 logical :: are_equal
 character(len=:), allocatable :: msg
+
+print *, "BLIS Version " // bli_info_get_version_str()
 
 a = reshape([1,1,1,2,2,2,3,3,3],[3,3])
 b = reshape([3,2,1,2,3,4],[3,2])
@@ -96,10 +99,10 @@ call bli_sgemm( &
     beta=0.0, &
     c=c(1,1), rs_c=1, cs_c=3)
 
-print *, "BLIS result: "
+print *, "BLIS Result: "
 print *, c
 
-print *, "Fortran result: "
+print *, "Fortran Result: "
 print *, matmul(a,b)
 
 are_equal = all(abs(c - matmul(a,b)) < 1.0e-6)
