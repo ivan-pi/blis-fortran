@@ -1,4 +1,4 @@
-AC_PREREQ([2.72])
+AC_PREREQ([2.71])
 AC_INIT([blis_fortran],[0.0],[ivan pribec and michele martone])
 AC_COPYRIGHT([Copyright (c) 2024-2024, ivan pribec and michele martone])
 AM_INIT_AUTOMAKE
