@@ -13,12 +13,7 @@ public :: bli_clock_min_diff
 
 public :: bli_info_get_version_str
 
-interface
-subroutine bli_init() bind(c)
-end subroutine
-subroutine bli_finalize() bind(c)
-end subroutine
-end interface
+include "blis_support.inc"
 
 interface
 real(c_double) function bli_clock() bind(c)
