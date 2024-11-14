@@ -3,6 +3,8 @@ AC_INIT([blis_fortran],[0.0],[ivan pribec and michele martone])
 AC_COPYRIGHT([Copyright (c) 2024-2024, ivan pribec and michele martone])
 AM_INIT_AUTOMAKE
 dnl AC_PROG_CXX
+AC_OPENMP dnl TODO: 
+CFLAGS="${CFLAGS} ${OPENMP_CFLAGS}";
 AC_CHECK_PROGS([GREP],[ggrep grep],[false],[])
 AC_CONFIG_HEADERS([config.h])
 AC_CHECK_HEADERS([libgen.h])
