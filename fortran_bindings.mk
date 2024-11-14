@@ -1,3 +1,7 @@
+all:
+	false
+	@info "WARNING: OBSOLETE; use it only as reference"
+
 BLIS_PREFIX = /usr/local
 BLIS_INC    = $(BLIS_PREFIX)/include/blis
 BLIS_LIB    = $(BLIS_PREFIX)/lib/libblis.a
