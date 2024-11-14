@@ -14,6 +14,7 @@ ff << fm.cf;
 @@
 
 BLIS_C2F_DICT = {
+	   'timpl_t': 'integer(c_int)',
 		 'dim_t': 'integer(dim_t)',
 		 'inc_t': 'integer(inc_t)',
 		'doff_t': 'integer(doff_t)',
