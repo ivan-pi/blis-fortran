@@ -19,5 +19,8 @@ include/gemm.inc: blis.cocci
 include/blis_support.inc: blis_support.cocci blis_support.h
 	spatch --sp-file $< blis_support.h > $@ --python `which python3`
 
+include/string_wrappers.inc: string_wrappers.cocci blis_support.h
+	spatch --sp-file $< blis_support.h > $@ --python `which python3`
+
 check:
 	spatch --testall
