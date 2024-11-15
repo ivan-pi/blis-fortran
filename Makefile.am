@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 bin_PROGRAMS=print_enums
 print_enums_SOURCES=print_enums.c
 AM_CXXFLAGS=-pedantic -Wall
@@ -22,13 +24,17 @@ include/blis_enums.inc: print_enums
 	./print_enums > $@
 
 include/gemm.inc: blis.cocci
-	spatch --sp-file $< blis_gemm.h > $@ --python `which python3`
+	spatch --sp-file $< blis_gemm.h -o $@ --python `which python3`
 
 include/blis_support.inc: blis_support.cocci blis_support.h
-	spatch --sp-file $< blis_support.h > $@ --python `which python3`
+	spatch --sp-file $< blis_support.h -o $@ --python `which python3`
 
 include/string_wrappers.inc: string_wrappers.cocci blis_support.h
-	spatch --sp-file $< blis_support.h > $@ --python `which python3`
+	spatch --sp-file $< blis_support.h -o $@ --python `which python3`
+
+include/blis.inc: blis.cocci blis_0.h
+	spatch --sp-file $< blis_0.h -o $@ --python `which python3`
+
 
 .phony: check
 check:
@@ -39,7 +45,7 @@ check:
 grind: $(NOGIT_CLEANFILES)
 
 blis_0.h:
-	cp $$( cpp <( echo '#include "blis.h"'; ) | grep '^#.*blis.h'| head -n 1 | awk '{ print $$3; }' | tr -d '"' ) -p $@
+	cp $$( cpp $(CFLAGS) <( echo '#include "blis.h"'; ) | grep '^#.*blis.h'| head -n 1 | awk '{ print $$3; }' | tr -d '"' ) -p $@
 # 	cp tests/noobj.c $@ # grind less ;-)
 
 blis_1.h:  tests/noobj.cocci blis_0.h
