@@ -8,6 +8,13 @@ BLIS - the BLAS-like Library Instantiation Software Framework, can be used to pe
 
 Note that the BLIS library already includes a BLAS compatibility layer. If you'd like to use the native BLAS interface, this project is not needed. However, BLIS is not BLAS, and BLIS exposes some extra functionality which is not available in BLAS.
 
+## TODO
+
+- convert enums (e.g. trans_t and conj_t)
+- convert structs (cntx_t and rntm_t) and expert routines
+- restore rank information
+- wrap object API
+
 ## Requirements
 
 To create the bindings you will need:

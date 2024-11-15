@@ -17,6 +17,32 @@ For some functions it is desirable to supply additional meta-data:
 - generic functions (e.g. the `s`, `d`, `c`, `z` routines)
 - function purity
 
+## Mapping strided arrays
+
+Several BLIS functions include array arguments:
+```cpp
+void bli_func(..., double *A, int rs_A, int cs_A, ...);
+```
+allowing to vary the stride along both directions.
+
+A direct mapping to Fortran would be,
+```fortran
+subroutine bli_func(...,A,rs_A,cs_A,...) bind(c)
+   real(c_double) :: A(*)
+   integer(c_int) :: rs_A, cs_A
+end subroutine
+```
+Due to storage sequence association rules in Fortran, this subroutine can also be used with rank-2 arrays, by setting `rs_A=1` and `cs_A=size(A,2)` during the call.
+
+It would be desirable to restore the rank information as follows,
+```fortran
+subroutine bli_func(...,A,rs_A,cs_A,...) bind(c)
+   integer(c_int) :: rs_A, cs_A
+   real(c_double) :: A(cs_A,*)
+end subroutine
+```
+(I'm not 100 % sure if this has much benefit, although in principle it would work the same. In either case, passing a row-major array in Fortran will be weird.)
+
 ## Mapping functions returning char *
 
 Several BLIS functions have prototypes similar to,
