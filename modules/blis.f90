@@ -28,33 +28,6 @@ end interface
 
 contains
 
-function bli_info_get_version_str() result(version_str)
-   character(len=:), allocatable :: version_str
-
-   interface
-      type(c_ptr) function c_bli_info_get_version_str() &
-            bind(c,name="bli_info_get_version_str")
-         import c_ptr
-      end function
-      integer(c_size_t) function c_strlen(s) bind(c,name="strlen")
-        import c_size_t, c_ptr
-        type(c_ptr), intent(in), value :: s
-      end function
-   end interface
-
-   type(c_ptr) :: c_version_str
-   integer(c_size_t) :: c_len
-
-   c_version_str = c_bli_info_get_version_str()
-   c_len = c_strlen(c_version_str)
-
-   allocate(character(len=c_len) :: version_str)
-
-   block
-      character(len=c_len,kind=c_char), pointer :: str
-      call c_f_pointer(c_version_str,str)
-      version_str = str
-   end block
-end function
+include "string_wrappers.inc"
 
 end module blis
