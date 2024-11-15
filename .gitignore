@@ -3,3 +3,4 @@
 *.o
 
 # include/
+tests/SCORE_*
