@@ -3,7 +3,7 @@ identifier cf =~ "bli_.*";
 parameter list PL;
 @@
 
-char* cf(PL);
+__attribute__((visibility("default"))) char* cf(PL);
 
 @script: python@
 pl << fm.PL;
