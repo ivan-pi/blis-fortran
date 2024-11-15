@@ -43,12 +43,12 @@ blis_0.h:
 # 	cp tests/noobj.c $@ # grind less ;-)
 
 blis_1.h:  tests/noobj.cocci blis_0.h
-	spatch --sp-file $+ > $@
+	spatch --sp-file $+ -o $@
 
 blis_2.h:  tests/noobjparm.cocci blis_1.h
-	spatch --sp-file $+ > $@
+	spatch --sp-file $+ -o $@
 
 blis_3.h:  tests/noattr.cocci blis_2.h
-	spatch --sp-file $+ > $@
+	spatch --sp-file $+ -o $@
 
 
