@@ -1,4 +1,22 @@
 
+## Filtering the desired functions 
+
+Ideas for how to filter the functions:
+- list of procedure names
+- visible symbols (`__attribute__ ((visibility ("default")))`)
+- based on argument type
+- combination of approaches above
+
+## Missing semantic information
+
+For some functions it is desirable to supply additional meta-data:
+
+- object rank (0-15)
+- intent (partially related to constness)
+- modules (don't exist in C)
+- generic functions (e.g. the `s`, `d`, `c`, `z` routines)
+- function purity
+
 ## Mapping functions returning char *
 
 Several BLIS functions have prototypes similar to,
@@ -67,3 +85,13 @@ Note how it requires
 - renaming the original C function,
 - querying the string length using `strlen`,
 - copying the string contents into a new Fortran deferred-length string
+
+## Other potential problems
+
+- unsigned ints (extension available in gfortran 15)
+- unions
+- names (Fortran names can't begin with `_`, length is limited)
+- line length
+- case-sensitivity (name conflicts)
+- typedefs (potentially could be strongly-typed)
+- unnamed arguments
