@@ -45,7 +45,7 @@ check:
 grind: $(NOGIT_CLEANFILES)
 
 blis_0.h:
-	cp $$( cpp $(CFLAGS) <( echo '#include "blis.h"'; ) | grep '^#.*blis.h'| head -n 1 | awk '{ print $$3; }' | tr -d '"' ) -p $@
+	if test -f "$(BLIS_HEADER)"; then cp $(BLIS_HEADER) $@; else cp $$( cpp <( echo '#include "blis.h"'; ) | grep '^#.*blis.h'| head -n 1 | awk '{ print $$3; }' | tr -d '"' ) -p $@; fi
 # 	cp tests/noobj.c $@ # grind less ;-)
 
 blis_1.h:  tests/noobj.cocci blis_0.h
