@@ -8,7 +8,6 @@ identifier f;
 -void
  );
 
-
 @fm@
 identifier cf =~ "bli_.*";
 parameter list [N={1...28}] PL;
@@ -23,6 +22,7 @@ ff << fm.cf;
 @@
 
 BLIS_C2F_DICT = {
+		 '_Bool': 'logical(c_bool)',
 		   'int': 'integer(c_int)',
 	   'timpl_t': 'integer(c_int)',
 		 'dim_t': 'integer(dim_t)',
@@ -40,7 +40,7 @@ BLIS_C2F_DICT = {
 }
 
 unwanted = ["obj_t", "void", "blksz_t", "char", "num_t", 
-		    "cntl_t", "cntx_t", "_Bool", "dir_t", "opid_t", 
+		    "cntl_t", "cntx_t", "dir_t", "opid_t", 
 		    "FILE", "f77_int", "machval_t", "ind_t",
 		    "errlev_t", "bli_pthread_once_t", "getopt_t",
 		    "subpart_t", "rntm_t", "thrinfo_t", "thrcomm_t"]

@@ -1427,8 +1427,16 @@ subroutine bli_ssubsc(conjchi, chi, psi) bind(c)
 end subroutine
 end interface
 
-! skipped the procedure using _Bool
-! void bli_seqsc(conj_t conjchi , const float * chi , const float * psi , _Bool * is_eq);
+interface
+! void bli_seqsc(conj_t conjchi, const float * chi, const float * psi, _Bool * is_eq)
+subroutine bli_seqsc(conjchi, chi, psi, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjchi
+  real(c_float), dimension(*), intent(in) :: chi
+  real(c_float), dimension(*), intent(in) :: psi
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_daddsc(conj_t conjchi, const double * chi, double * psi)
@@ -1470,8 +1478,16 @@ subroutine bli_dsubsc(conjchi, chi, psi) bind(c)
 end subroutine
 end interface
 
-! skipped the procedure using _Bool
-! void bli_deqsc(conj_t conjchi , const double * chi , const double * psi , _Bool * is_eq);
+interface
+! void bli_deqsc(conj_t conjchi, const double * chi, const double * psi, _Bool * is_eq)
+subroutine bli_deqsc(conjchi, chi, psi, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjchi
+  real(c_double), dimension(*), intent(in) :: chi
+  real(c_double), dimension(*), intent(in) :: psi
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_zaddsc(conj_t conjchi, const dcomplex * chi, dcomplex * psi)
@@ -1513,8 +1529,16 @@ subroutine bli_zsubsc(conjchi, chi, psi) bind(c)
 end subroutine
 end interface
 
-! skipped the procedure using _Bool
-! void bli_zeqsc(conj_t conjchi , const dcomplex * chi , const dcomplex * psi , _Bool * is_eq);
+interface
+! void bli_zeqsc(conj_t conjchi, const dcomplex * chi, const dcomplex * psi, _Bool * is_eq)
+subroutine bli_zeqsc(conjchi, chi, psi, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjchi
+  complex(c_double), dimension(*), intent(in) :: chi
+  complex(c_double), dimension(*), intent(in) :: psi
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_caddsc(conj_t conjchi, const scomplex * chi, scomplex * psi)
@@ -1556,8 +1580,16 @@ subroutine bli_csubsc(conjchi, chi, psi) bind(c)
 end subroutine
 end interface
 
-! skipped the procedure using _Bool
-! void bli_ceqsc(conj_t conjchi , const scomplex * chi , const scomplex * psi , _Bool * is_eq);
+interface
+! void bli_ceqsc(conj_t conjchi, const scomplex * chi, const scomplex * psi, _Bool * is_eq)
+subroutine bli_ceqsc(conjchi, chi, psi, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjchi
+  complex(c_float), dimension(*), intent(in) :: chi
+  complex(c_float), dimension(*), intent(in) :: psi
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_sger(conj_t conjx, conj_t conjy, dim_t m, dim_t n, const float * alpha, const float * x, inc_t incx, const float * y, inc_t incy, float * a, inc_t rs_a, inc_t cs_a)
@@ -2204,8 +2236,19 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_ssubv_ex(conj_t conjx , dim_t n , const float * x , inc_t incx , float * y , inc_t incy , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_seqv(conj_t conjx , dim_t n , const float * x , inc_t incx , const float * y , inc_t incy , _Bool * is_eq);
+interface
+! void bli_seqv(conj_t conjx, dim_t n, const float * x, inc_t incx, const float * y, inc_t incy, _Bool * is_eq)
+subroutine bli_seqv(conjx, n, x, incx, y, incy, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjx
+  integer(dim_t), value, intent(in) :: n
+  real(c_float), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: incx
+  real(c_float), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: incy
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_dxpbyv(conj_t conjx, dim_t n, const double * x, inc_t incx, const double * beta, double * y, inc_t incy)
@@ -2272,8 +2315,19 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_dsubv_ex(conj_t conjx , dim_t n , const double * x , inc_t incx , double * y , inc_t incy , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_deqv(conj_t conjx , dim_t n , const double * x , inc_t incx , const double * y , inc_t incy , _Bool * is_eq);
+interface
+! void bli_deqv(conj_t conjx, dim_t n, const double * x, inc_t incx, const double * y, inc_t incy, _Bool * is_eq)
+subroutine bli_deqv(conjx, n, x, incx, y, incy, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjx
+  integer(dim_t), value, intent(in) :: n
+  real(c_double), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: incx
+  real(c_double), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: incy
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_zxpbyv(conj_t conjx, dim_t n, const dcomplex * x, inc_t incx, const dcomplex * beta, dcomplex * y, inc_t incy)
@@ -2340,8 +2394,19 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_zsubv_ex(conj_t conjx , dim_t n , const dcomplex * x , inc_t incx , dcomplex * y , inc_t incy , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_zeqv(conj_t conjx , dim_t n , const dcomplex * x , inc_t incx , const dcomplex * y , inc_t incy , _Bool * is_eq);
+interface
+! void bli_zeqv(conj_t conjx, dim_t n, const dcomplex * x, inc_t incx, const dcomplex * y, inc_t incy, _Bool * is_eq)
+subroutine bli_zeqv(conjx, n, x, incx, y, incy, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjx
+  integer(dim_t), value, intent(in) :: n
+  complex(c_double), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: incx
+  complex(c_double), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: incy
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_cxpbyv(conj_t conjx, dim_t n, const scomplex * x, inc_t incx, const scomplex * beta, scomplex * y, inc_t incy)
@@ -2408,8 +2473,19 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_csubv_ex(conj_t conjx , dim_t n , const scomplex * x , inc_t incx , scomplex * y , inc_t incy , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_ceqv(conj_t conjx , dim_t n , const scomplex * x , inc_t incx , const scomplex * y , inc_t incy , _Bool * is_eq);
+interface
+! void bli_ceqv(conj_t conjx, dim_t n, const scomplex * x, inc_t incx, const scomplex * y, inc_t incy, _Bool * is_eq)
+subroutine bli_ceqv(conjx, n, x, incx, y, incy, is_eq) bind(c)
+    use blis_kinds
+  integer(conj_t), value, intent(in) :: conjx
+  integer(dim_t), value, intent(in) :: n
+  complex(c_float), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: incx
+  complex(c_float), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: incy
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_sdotaxpyv(conj_t conjxt, conj_t conjx, conj_t conjy, dim_t n, const float * alpha, const float * x, inc_t incx, const float * y, inc_t incy, float * rho, float * z, inc_t incz)
@@ -3614,8 +3690,25 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_ssubm_ex(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const float * x , inc_t rs_x , inc_t cs_x , float * y , inc_t rs_y , inc_t cs_y , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_seqm(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const float * x , inc_t rs_x , inc_t cs_x , const float * y , inc_t rs_y , inc_t cs_y , _Bool * is_eq);
+interface
+! void bli_seqm(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const float * x, inc_t rs_x, inc_t cs_x, const float * y, inc_t rs_y, inc_t cs_y, _Bool * is_eq)
+subroutine bli_seqm(diagoffx, diagx, uplox, transx, m, n, x, rs_x, cs_x, y, rs_y, cs_y, is_eq) bind(c)
+    use blis_kinds
+  integer(doff_t), value, intent(in) :: diagoffx
+  integer(diag_t), value, intent(in) :: diagx
+  integer(uplo_t), value, intent(in) :: uplox
+  integer(trans_t), value, intent(in) :: transx
+  integer(dim_t), value, intent(in) :: m
+  integer(dim_t), value, intent(in) :: n
+  real(c_float), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: rs_x
+  integer(inc_t), value, intent(in) :: cs_x
+  real(c_float), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: rs_y
+  integer(inc_t), value, intent(in) :: cs_y
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_dsxpbym_md(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const double * x, inc_t rs_x, inc_t cs_x, const float * beta, float * y, inc_t rs_y, inc_t cs_y)
@@ -3798,8 +3891,25 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_dsubm_ex(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const double * x , inc_t rs_x , inc_t cs_x , double * y , inc_t rs_y , inc_t cs_y , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_deqm(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const double * x , inc_t rs_x , inc_t cs_x , const double * y , inc_t rs_y , inc_t cs_y , _Bool * is_eq);
+interface
+! void bli_deqm(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const double * x, inc_t rs_x, inc_t cs_x, const double * y, inc_t rs_y, inc_t cs_y, _Bool * is_eq)
+subroutine bli_deqm(diagoffx, diagx, uplox, transx, m, n, x, rs_x, cs_x, y, rs_y, cs_y, is_eq) bind(c)
+    use blis_kinds
+  integer(doff_t), value, intent(in) :: diagoffx
+  integer(diag_t), value, intent(in) :: diagx
+  integer(uplo_t), value, intent(in) :: uplox
+  integer(trans_t), value, intent(in) :: transx
+  integer(dim_t), value, intent(in) :: m
+  integer(dim_t), value, intent(in) :: n
+  real(c_double), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: rs_x
+  integer(inc_t), value, intent(in) :: cs_x
+  real(c_double), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: rs_y
+  integer(inc_t), value, intent(in) :: cs_y
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_zsxpbym_md(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const dcomplex * x, inc_t rs_x, inc_t cs_x, const float * beta, float * y, inc_t rs_y, inc_t cs_y)
@@ -3982,8 +4092,25 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_zsubm_ex(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const dcomplex * x , inc_t rs_x , inc_t cs_x , dcomplex * y , inc_t rs_y , inc_t cs_y , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_zeqm(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const dcomplex * x , inc_t rs_x , inc_t cs_x , const dcomplex * y , inc_t rs_y , inc_t cs_y , _Bool * is_eq);
+interface
+! void bli_zeqm(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const dcomplex * x, inc_t rs_x, inc_t cs_x, const dcomplex * y, inc_t rs_y, inc_t cs_y, _Bool * is_eq)
+subroutine bli_zeqm(diagoffx, diagx, uplox, transx, m, n, x, rs_x, cs_x, y, rs_y, cs_y, is_eq) bind(c)
+    use blis_kinds
+  integer(doff_t), value, intent(in) :: diagoffx
+  integer(diag_t), value, intent(in) :: diagx
+  integer(uplo_t), value, intent(in) :: uplox
+  integer(trans_t), value, intent(in) :: transx
+  integer(dim_t), value, intent(in) :: m
+  integer(dim_t), value, intent(in) :: n
+  complex(c_double), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: rs_x
+  integer(inc_t), value, intent(in) :: cs_x
+  complex(c_double), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: rs_y
+  integer(inc_t), value, intent(in) :: cs_y
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_csxpbym_md(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const scomplex * x, inc_t rs_x, inc_t cs_x, const float * beta, float * y, inc_t rs_y, inc_t cs_y)
@@ -4166,8 +4293,25 @@ end interface
 ! skipped the procedure using cntx_t
 ! void bli_csubm_ex(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const scomplex * x , inc_t rs_x , inc_t cs_x , scomplex * y , inc_t rs_y , inc_t cs_y , const cntx_t * cntx , rntm_t * rntm);
 
-! skipped the procedure using _Bool
-! void bli_ceqm(doff_t diagoffx , diag_t diagx , uplo_t uplox , trans_t transx , dim_t m , dim_t n , const scomplex * x , inc_t rs_x , inc_t cs_x , const scomplex * y , inc_t rs_y , inc_t cs_y , _Bool * is_eq);
+interface
+! void bli_ceqm(doff_t diagoffx, diag_t diagx, uplo_t uplox, trans_t transx, dim_t m, dim_t n, const scomplex * x, inc_t rs_x, inc_t cs_x, const scomplex * y, inc_t rs_y, inc_t cs_y, _Bool * is_eq)
+subroutine bli_ceqm(diagoffx, diagx, uplox, transx, m, n, x, rs_x, cs_x, y, rs_y, cs_y, is_eq) bind(c)
+    use blis_kinds
+  integer(doff_t), value, intent(in) :: diagoffx
+  integer(diag_t), value, intent(in) :: diagx
+  integer(uplo_t), value, intent(in) :: uplox
+  integer(trans_t), value, intent(in) :: transx
+  integer(dim_t), value, intent(in) :: m
+  integer(dim_t), value, intent(in) :: n
+  complex(c_float), dimension(*), intent(in) :: x
+  integer(inc_t), value, intent(in) :: rs_x
+  integer(inc_t), value, intent(in) :: cs_x
+  complex(c_float), dimension(*), intent(in) :: y
+  integer(inc_t), value, intent(in) :: rs_y
+  integer(inc_t), value, intent(in) :: cs_y
+  logical(c_bool), dimension(*), intent(inout) :: is_eq
+end subroutine
+end interface
 
 interface
 ! void bli_ssetid(doff_t diagoffx, dim_t m, dim_t n, const float * alpha, float * x, inc_t rs_x, inc_t cs_x)
@@ -5247,17 +5391,37 @@ end interface
 ! skipped the procedure using void
 ! void bli_obj_attach_buffer(void * p , inc_t rs , inc_t cs , inc_t is , obj_t * obj);
 
-! skipped the procedure using _Bool
-! void bli_pack_set_pack_a(_Bool pack_a);
+interface
+! void bli_pack_set_pack_a(_Bool pack_a)
+subroutine bli_pack_set_pack_a(pack_a) bind(c)
+    use blis_kinds
+  logical(c_bool), value, intent(in) :: pack_a
+end subroutine
+end interface
 
-! skipped the procedure using _Bool
-! void bli_pack_get_pack_a(_Bool * pack_a);
+interface
+! void bli_pack_get_pack_a(_Bool * pack_a)
+subroutine bli_pack_get_pack_a(pack_a) bind(c)
+    use blis_kinds
+  logical(c_bool), dimension(*), intent(inout) :: pack_a
+end subroutine
+end interface
 
-! skipped the procedure using _Bool
-! void bli_pack_set_pack_b(_Bool pack_b);
+interface
+! void bli_pack_set_pack_b(_Bool pack_b)
+subroutine bli_pack_set_pack_b(pack_b) bind(c)
+    use blis_kinds
+  logical(c_bool), value, intent(in) :: pack_b
+end subroutine
+end interface
 
-! skipped the procedure using _Bool
-! void bli_pack_get_pack_b(_Bool * pack_b);
+interface
+! void bli_pack_get_pack_b(_Bool * pack_b)
+subroutine bli_pack_get_pack_b(pack_b) bind(c)
+    use blis_kinds
+  logical(c_bool), dimension(*), intent(inout) :: pack_b
+end subroutine
+end interface
 
 ! skipped the procedure using subpart_t
 ! void bli_acquire_mpart_t2b(subpart_t req_part , dim_t i , dim_t b , const obj_t * obj , obj_t * sub_obj);
@@ -7700,7 +7864,7 @@ end interface
 
 ! skipped the procedure using obj_t
 --- blis.h.pp
-+++ /tmp/cocci-output-1367-9d7222-blis.h.pp
++++ /tmp/cocci-output-2733-1fc9db-blis.h.pp
 @@ -1844,7 +1844,7 @@ int getchar(void);
  long ftell(FILE *);
  size_t fwrite(const void * restrict __ptr, size_t __size, size_t __nitems, FILE * restrict __stream) __asm("_" "fwrite" );
