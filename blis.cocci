@@ -1,12 +1,21 @@
+// remove empty arguments lists
+@@
+type t;
+identifier f;
+@@
+
+ t f ( 
+-void
+ );
+
+
 @fm@
 identifier cf =~ "bli_.*";
 parameter list [N={1...28}] PL;
 expression list E;
 @@
 
-
-void cf(PL@E);
-
+__attribute__((visibility("default"))) void cf(PL@E);
 
 @script: python@
 pl << fm.PL;
@@ -14,6 +23,7 @@ ff << fm.cf;
 @@
 
 BLIS_C2F_DICT = {
+		   'int': 'integer(c_int)',
 	   'timpl_t': 'integer(c_int)',
 		 'dim_t': 'integer(dim_t)',
 		 'inc_t': 'integer(inc_t)',
@@ -29,13 +39,18 @@ BLIS_C2F_DICT = {
 		'diag_t': 'integer(diag_t)'
 }
 
+unwanted = ["obj_t", "void", "blksz_t", "char", "num_t", 
+		    "cntl_t", "cntx_t", "_Bool", "dir_t", "opid_t", 
+		    "FILE", "f77_int", "machval_t", "ind_t",
+		    "errlev_t", "bli_pthread_once_t", "getopt_t",
+		    "subpart_t", "rntm_t", "thrinfo_t", "thrcomm_t"]
+
 SUB_HEAD = "subroutine {name}({parameters}) bind(c)\n"
 SUB_IMPORT = "    use blis_kinds\n"
 SUB_BODY = "{declarations}\n"
-SUB_END = "end subroutine\n"
+SUB_END = "end subroutine"
 
 SUB_STRING = SUB_HEAD + SUB_IMPORT + SUB_BODY + SUB_END
-SUB_STRING = "interface\n{}end interface\n".format(SUB_STRING)
 
 def fortran_subroutine(name,parameters,declarations,indent = 2):
 	"""Generate a Fortran subroutine interface."""
@@ -50,7 +65,7 @@ def fortran_subroutine(name,parameters,declarations,indent = 2):
 		declarations='\n'.join(declarations)
 		)
 
-def parameter_and_declaration_lists(pl,C2F_DICT=BLIS_C2F_DICT):
+def parameter_and_declaration_lists(cf,pl,C2F_DICT=BLIS_C2F_DICT):
 	"""Break a list C declarations into Fortran form"""
 
 	parameters = []
@@ -85,6 +100,12 @@ def parameter_and_declaration_lists(pl,C2F_DICT=BLIS_C2F_DICT):
 		attributes.append('intent({})'.format(intent))
 
 		c_type = parts.pop()
+
+		if c_type in unwanted:
+			print(f"! skipped the procedure using {c_type}")
+			print(f"! void {cf}({pl});\n")
+			return None, None
+
 		decl_type = C2F_DICT[c_type]
 		decl_attr = ', '.join(attributes)
 
@@ -97,9 +118,13 @@ def parameter_and_declaration_lists(pl,C2F_DICT=BLIS_C2F_DICT):
 
 	return parameters, declarations
 
-print("! void {name}({args})".format(name=ff,args=", ".join(pl)))
 
-params, decls = parameter_and_declaration_lists(pl)
-print(fortran_subroutine(ff,params,decls))
 
+params, decls = parameter_and_declaration_lists(ff,pl)
+
+if params is not None:
+	print("interface")
+	print("! void {name}({args})".format(name=ff,args=", ".join(pl)))
+	print(fortran_subroutine(ff,params,decls))
+	print("end interface\n")
 
