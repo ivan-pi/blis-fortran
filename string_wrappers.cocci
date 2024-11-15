@@ -17,13 +17,15 @@ function {name}() result(str)
    interface
       !> The procedure we're wrapping
       !> char* {name}();
-      type(c_ptr) function c_{name}() bind(c,name="{name}")
+      function c_{name}() bind(c,name="{name}")
          import c_ptr
+         type(c_ptr) :: c_{name}
       end function
       !> String length helper function
-      integer(c_size_t) function c_strlen(s) bind(c,name="strlen")
+      function c_strlen(s) bind(c,name="strlen")
         import c_size_t, c_ptr
         type(c_ptr), intent(in), value :: s
+        integer(c_size_t) :: c_strlen
       end function
    end interface
    type(c_ptr) :: c_str_ptr

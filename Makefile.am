@@ -5,7 +5,8 @@ AM_CXXFLAGS=-pedantic -Wall
 CLEANFILES= \
 	include/blis_enums.inc \
 	include/gemm.inc \
-	include/blis_support.inc
+	include/blis_support.inc \
+	include/string_wrappers.inc
 EXTRA_DIST=$(CLEANFILES)
 
 all: $(bin_PROGRAMS) $(EXTRA_DIST)
