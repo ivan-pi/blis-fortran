@@ -2,10 +2,10 @@ Custom library wrappers using Coccinelle (deRSE 2025 talk)
 
 Titles:
 
+- Semantic Patch Engineering: Exposing a C library for Cross-Language Reuse
 - Tackling Fortran C interoperability using Coccinelle
 - Semantic Patch Engineering: the Journey wrapping the BLIS framework for linear algebra
 - Semantic Patch Engineering: Crossing the Language Gap 
-- Semantic Patch Engineering: Exposing a C library for Cross-Language Reuse
 - Semantic Patch Design for Fortran-C interop/bindings 
 - Engineering a Semantic Patch for BLIS bindings
 
