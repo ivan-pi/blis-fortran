@@ -13,9 +13,9 @@ Titles:
 deRSE:
 
 Abstract 1
-Eva is a research software engineer working on project in language X**2.
+Eva is a research software engineer working on project in language YFL (Your Favorite Language).
 During her work she discovers that there is a C library which includes the functionality she wants.
-Writing the bindings from X**2 to C manually is drudgery.
+Writing the bindings from YFL to C manually is drudgery.
 With over 100 functions to bind, it will take her weeks to complete.
 If only there was a way to do it faster?
 Join this tutorial on Coccinelle, a pattern matching and transformation system, to simplify the task of wrapping a C library with just a couple of simple rules.
