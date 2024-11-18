@@ -1,8 +1,10 @@
 Custom library wrappers using Coccinelle (deRSE 2025 talk)
 
+Submit candidate marked with (**)
+
 Titles:
 
-- Semantic Patch Engineering: Exposing a C library for Cross-Language Reuse
+- Semantic Patch Engineering: Exposing a C library for Cross-Language Reuse (**)
 - Tackling Fortran C interoperability using Coccinelle
 - Semantic Patch Engineering: the Journey wrapping the BLIS framework for linear algebra
 - Semantic Patch Engineering: Crossing the Language Gap 
@@ -12,7 +14,7 @@ Titles:
 
 deRSE:
 
-Abstract 1
+Abstract 1 (**)
 Eva is a research software engineer working on project in language YFL (Your Favorite Language).
 During her work she discovers that there is a C library which includes the functionality she wants.
 Writing the bindings from YFL to C manually is drudgery.
@@ -20,7 +22,8 @@ With over 100 functions to bind, it will take her weeks to complete.
 If only there was a way to do it faster?
 Join this tutorial on Coccinelle, a pattern matching and transformation system, to simplify the task of wrapping a C library with just a couple of simple rules.
 By using the right tools for the job, we show you how the daunting task is broken into smaller manageable pieces. 
-Participants are welcome to bring along their own header files and follow along. 
+Participants are welcome to bring along their own C header files (or relevant subsets thereof) and follow along. 
+We assume participants come with Coccinelle preinstalled on their laptop (it's widely packaged) and have very basic Python knowledge.
 
 Abstract 2
 Exposing procedures between programming languages is menial and repetitious work,
