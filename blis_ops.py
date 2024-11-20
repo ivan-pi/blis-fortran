@@ -33,7 +33,7 @@ operations = {
 }
 
 types = ['s','d','c','z']
-pretty_generic = True
+pretty_generic = False
 
 if pretty_generic:
     for level, ops in operations.items():

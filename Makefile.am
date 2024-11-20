@@ -12,6 +12,7 @@ NOGIT_CLEANFILES= \
 
 CLEANFILES= \
 	include/blis_enums.inc \
+	include/blis_generics.inc \
 	include/gemm.inc \
 	include/blis_support.inc \
 	include/string_wrappers.inc \
@@ -24,6 +25,9 @@ all: $(bin_PROGRAMS) $(EXTRA_DIST)
 
 include/blis_enums.inc: print_enums
 	./print_enums > $@
+
+include/blis_generics.inc: blis_ops.py
+	python3 $< > $@
 
 include/gemm.inc: blis.cocci
 	spatch --sp-file $< blis_gemm.h --python `which python3` > $@
