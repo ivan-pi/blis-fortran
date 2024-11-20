@@ -33,17 +33,19 @@ operations = {
 }
 
 types = ['s','d','c','z']
+pretty_generic = True
 
-for level, ops in operations.items():
-    print(f"\n! {level}")
-    for op in ops:
-        typed_ops = ', '.join(f"bli_{t}{op}" for t in types)
-        print(f"generic :: bli_{op} => {typed_ops}")
-
-for level, ops in operations.items():
-    print(f"\n! {level}")
-    for op in ops:
-        print(f"interface bli_{op}")
-        typed_ops = ', '.join(f"bli_{t}{op}" for t in types)
-        print(f"  procedure :: {typed_ops}")
-        print(f"end interface")
+if pretty_generic:
+    for level, ops in operations.items():
+        print(f"\n! {level}")
+        for op in ops:
+            typed_ops = ', '.join(f"bli_{t}{op}" for t in types)
+            print(f"generic :: bli_{op} => {typed_ops}")
+else:
+    for level, ops in operations.items():
+        print(f"\n! {level}")
+        for op in ops:
+            print(f"interface bli_{op}")
+            typed_ops = ', '.join(f"bli_{t}{op}" for t in types)
+            print(f"  procedure :: {typed_ops}")
+            print(f"end interface")
