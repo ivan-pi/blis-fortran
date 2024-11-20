@@ -1,0 +1,132 @@
+
+#:set types = ['s','d','c','z']
+#:set type_kind = ['real(c_float)','real(c_double)','complex(c_float)','complex(c_double)']
+
+!> Set the elements of vector x to random values on the interval [-1,1)
+interface bli_randv
+#:for t in types
+  module procedure bli_${t}$randv
+#:endfor
+end interface
+
+!> Set the elements of a matrix to random values on the interval [-1,1)
+interface bli_randm
+#:for t in types
+  module procedure bli_${t}$randv
+#:endfor
+end interface
+
+!> Print vector to a file unit
+interface bli_fprintv
+#:for t in types
+  module procedure bli_${t}$fprintv
+#:endfor
+end interface
+
+!> Print vector to default output
+interface bli_printv
+#:for t in types
+  module procedure bli_${t}$printv
+#:endfor
+end interface
+
+!> Print matrix to a file unit
+interface bli_fprintm
+#:for t in types
+  module procedure bli_${t}$fprintv
+#:endfor
+end interface
+
+!> Print matrix to default output
+interface bli_printm
+#:for t in types
+  module procedure bli_${t}$printv
+#:endfor
+end interface
+
+contains
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$randv(x)
+  ${tk}$, intent(out) :: x(:)
+  call random_number(x)
+  x = 2*x - 1
+end subroutine
+#:endfor
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$randm(diagoffa,uploa,A)
+  integer(doff_kind), intent(in) :: diagoffa
+  integer(uplo_kind), intent(in) :: uploa
+  ${tk}$, intent(out) :: A(:,:)
+  real(kind(A)) :: scale
+  integer :: i, j
+
+  call random_number(A)
+  x = 2*x - 1
+
+  ! TODO: diagoffa
+
+  scale = real(1,kind(A))/max(shape(A))
+  if (uploa == BLIS_LOWER) then
+    do j = 2, size(A,2)
+        do i = j, size(A,1)
+            A(i,j) = scale*A(i,j)
+        end do
+    end do
+  else if (uploa == BLIS_UPPER) then
+    do j = 2, size(A,2)
+        do i = 2, j
+            A(i,j) = scale*A(i,j)
+        end do
+    end do
+  end if
+
+end subroutine
+#:endfor
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$fprintv(unit,s1,x,fmt,s2)
+    integer, intent(in) :: unit
+    character(len=*), intent(in) :: s1
+    ${tk}$, intent(in) :: x(:)
+    character(len=*), intent(in), optional :: fmt, s2
+    write(unit,'(A)') trim(s1)
+    write(unit,'(*'//fmt//')') x
+    if (present(s2)) write(unit,'(A)') s2
+end subroutine
+#:endfor
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$printv(s1,x,fmt,s2)
+    use, intrinsic :: iso_fortran_env, only: output_unit
+    integer, intent(in) :: unit
+    character(len=*), intent(in) :: s1
+    real(c_double), intent(in) :: x(:)
+    character(len=*), intent(in), optional :: fmt, s2
+    call bli_${t}$fprintv(output_unit,s1,x,fmt,s2)
+end subroutine
+#:endfor
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$fprintm(unit,s1,a,fmt,s2)
+    integer, intent(in) :: unit
+    character(len=*), intent(in) :: s1
+    ${tk}$, intent(in) :: a(:,:)
+    character(len=*), intent(in), optional :: fmt, s2
+    write(unit,'(A)') trim(s1)
+    write(unit,'(*'//fmt//')') x
+    if (present(s2)) write(unit,'(A)') s2
+end subroutine
+#:endfor
+
+#:for t, tk in zip(types,type_kind)
+subroutine bli_${t}$printm(s1,a,fmt,s2)
+    use, intrinsic :: iso_fortran_env, only: output_unit
+    integer, intent(in) :: unit
+    character(len=*), intent(in) :: s1
+    ${tk}$, intent(in) :: a(:,:)
+    character(len=*), intent(in), optional :: fmt, s2
+    call bli_${t}$fprintm(output_unit,s1,a,fmt,s2)
+end subroutine
+#:endfor
