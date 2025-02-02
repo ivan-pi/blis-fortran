@@ -8,30 +8,28 @@ BLIS - the BLAS-like Library Instantiation Software Framework, can be used to pe
 
 Note that the BLIS library already includes a BLAS compatibility layer. If you'd like to use the native BLAS interface, this project is not needed. However, BLIS is not BLAS, and BLIS exposes some extra functionality which is not available in BLAS.
 
-## TODO
-
-- convert enums (e.g. trans_t and conj_t)
-- convert structs (cntx_t and rntm_t) and expert routines
-- restore rank information
-- wrap object API
-
 ## Requirements
 
 To create the bindings you will need:
 * [Coccinelle](https://coccinelle.gitlabpages.inria.fr/website/)
 * Python 3
 * A Fortran processor with a C co-processor (e.g. `gfortran` and `gcc` from the GNU Compiler Collection)
-* GNU `make`
+* Autotools
 
 ## Building
 
 _NOTE: This section assumes you've already installed BLIS into a known location. For more details refer to the BLIS [Build System](https://github.com/flame/blis/blob/master/docs/BuildSystem.md)._
 
-To build the Fortran interfaces run:
+Configure the project:
 ```
-$ make -f fortran_bindings.mk 
+ ./configure --with-blis-header=/path/to/blis/include/../blis.h \
+    CFLAGS=-I/path/to/blis/../include \
+    LDFLAGS=-L/path/to/blis/../lib \
+    && make
 ```
 This will place the BLIS Fortran interfaces in the folder `include/`. Currently only a small subset of the BLIS Typed API is covered.
+
+The Fortran BLIS bindings are placed into the folder `include/`.
 
 ## Examples & tests
 

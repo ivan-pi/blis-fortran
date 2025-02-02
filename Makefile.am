@@ -38,8 +38,12 @@ include/blis_support.inc: blis_support.cocci blis_support.h
 include/string_wrappers.inc: string_wrappers.cocci blis.h.pp
 	spatch --sp-file $< blis.h.pp --python `which python3` > $@
 
-include/blis.inc: blis.cocci blis.h.pp
+include/blis.inc: blis.cocci blis.h.pp remove_void
 	spatch --sp-file $< blis.h.pp --python `which python3` > $@
+
+remove_void: remove_single_void.cocci blis.h.pp
+	spatch --sp-file $< blis.h.pp > remove_void.diff
+	patch < remove_void.diff
 
 .phony: check
 check:
