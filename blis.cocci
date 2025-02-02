@@ -1,24 +1,13 @@
-// remove empty arguments lists
-@@
-type t;
-identifier f;
-@@
-
- t f ( 
--void
- );
-
-@fm@
-identifier cf =~ "bli_.*";
-parameter list [N={1...28}] PL;
-expression list E;
+@match_void@
+identifier F =~ "bli_.*";
+parameter list PL;
 @@
 
-__attribute__((visibility("default"))) void cf(PL@E);
+__attribute__((visibility("default"))) void F(PL);
 
 @script: python@
-pl << fm.PL;
-ff << fm.cf;
+pl << match_void.PL;
+ff << match_void.F;
 @@
 
 BLIS_C2F_DICT = {
@@ -39,8 +28,8 @@ BLIS_C2F_DICT = {
 		'diag_t': 'integer(diag_t)'
 }
 
-unwanted = ["obj_t", "void", "blksz_t", "char", "num_t", 
-		    "cntl_t", "cntx_t", "dir_t", "opid_t", 
+unwanted = ["obj_t", "void", "blksz_t", "char", "num_t",
+		    "cntl_t", "cntx_t", "dir_t", "opid_t",
 		    "FILE", "f77_int", "machval_t", "ind_t",
 		    "errlev_t", "bli_pthread_once_t", "getopt_t",
 		    "subpart_t", "rntm_t", "thrinfo_t", "thrcomm_t"]
